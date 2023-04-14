@@ -1,0 +1,308 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 package com.OrangeHRM_Application.classes;\par
+import java.util.List;\par
+import java.util.Properties;\par
+\par
+import org.openqa.selenium.By;\par
+import org.openqa.selenium.WebElement;\par
+import org.testng.annotations.AfterMethod;\par
+import org.testng.annotations.BeforeMethod;\par
+import org.testng.annotations.Test;\par
+public class DirectoryFunctionality extends LoginFunctionality\{\par
+\par
+\tab @BeforeMethod\par
+\tab public void loginToApplication() \{\par
+\tab\tab try \{\par
+\tab\tab  driverInitialize();\par
+\tab\tab  loadProperty();\par
+\tab\tab  loginFunction();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test\par
+\tab public void searchEmployeeByEmployeeName() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");\par
+\par
+\tab\tab searchEmployee(employee_name,null,null);\par
+\tab\}\par
+\par
+\tab @Test(priority=1)\par
+\tab public void searchEmployeeByEmployeeNameAndValidJobTitle() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");  \par
+\tab\tab String valid_jobtitle = p.getProperty("directory_valid_jobtitle");  \par
+\par
+\tab\tab searchEmployee(employee_name,valid_jobtitle,null);\par
+\tab\}\par
+\par
+\tab @Test(priority=2)\par
+\tab public void searchEmployeeByEmployeeNameAndInvalidJobTitle() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");  \par
+\tab\tab String invalid_jobtitle = p.getProperty("directory_invalid_jobtitle"); \par
+\par
+\tab\tab searchEmployee(employee_name,invalid_jobtitle,null);\par
+\tab\}\par
+\par
+\tab @Test(priority=3)\par
+\tab public void searchEmployeeByEmployeeName_ValidJobTitleAndValidLocation() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");  \par
+\tab\tab String valid_jobtitle = p.getProperty("directory_valid_jobtitle"); \par
+\tab\tab String valid_location = p.getProperty("directory_valid_location");\par
+\par
+\tab\tab searchEmployee(employee_name,valid_jobtitle,valid_location);\par
+\tab\}\par
+\par
+\tab @Test(priority=4)\par
+\tab public void searchEmployeeByEmployeeName_InvalidJobTitleAndValidLocation() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");  \par
+\tab\tab String invalid_jobtitle = p.getProperty("directory_invalid_jobtitle");\par
+\tab\tab String valid_location = p.getProperty("directory_valid_location");\par
+\par
+\tab\tab searchEmployee(employee_name,invalid_jobtitle,valid_location);\par
+\tab\}\par
+\par
+\tab @Test(priority=5)\par
+\tab public void searchEmployeeByEmployeeName_ValidJobTitleAndInvalidLocation() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");\par
+\tab\tab String valid_jobtitle = p.getProperty("directory_valid_jobtitle");\par
+\tab\tab String invalid_location = p.getProperty("directory_invalid_location");\par
+\par
+\tab\tab searchEmployee(employee_name,valid_jobtitle,invalid_location);\par
+\tab\}\par
+\par
+\tab @Test(priority=6)\par
+\tab public void searchEmployeeByEmployeeName_InvalidJobTitleAndInvalidLocation() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employee_name = p.getProperty("directory_employee_name");\par
+\tab\tab String invalid_jobtitle = p.getProperty("directory_invalid_jobtitle");\par
+\tab\tab String invalid_location = p.getProperty("directory_invalid_location");\par
+\par
+\tab\tab searchEmployee(employee_name,invalid_jobtitle,invalid_location);\par
+\tab\}\par
+\par
+\tab @Test(priority=7)\par
+\tab public void searchEmployeeByJobTitle() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String invalid_jobtitle = p.getProperty("directory_invalid_jobtitle");\par
+\par
+\tab\tab searchEmployee(null,invalid_jobtitle, null);\par
+\tab\}\par
+\par
+\tab @Test(priority=8)\par
+\tab public void searchEmployeeByLocation() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String invalid_location = p.getProperty("directory_invalid_location");\par
+\par
+\tab\tab searchEmployee(null,null,invalid_location);\par
+\tab\}\par
+\par
+\tab @Test(priority=9)\par
+\tab public void clickOnHideIcon() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String hide_icon_button_locator = p.getProperty("directory_hide_icon_button_locator");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab driver.findElement(By.xpath(hide_icon_button_locator)).click();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab e.getMessage();\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test(priority=10)\par
+\tab public void resetTheSelectedValues() \{\par
+\tab\tab try \{\par
+\tab\tab     //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String invalid_jobtitle = p.getProperty("directory_invalid_jobtitle");\par
+\tab\tab\tab String reset_button_locator = p.getProperty("directory_reset_button_locator");\par
+\tab\tab\tab searchEmployee(null,invalid_jobtitle, null);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab driver.findElement(By.xpath(reset_button_locator)).click();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab e.getMessage();\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\par
+\tab @Test(priority=11)\par
+\tab public void viewEmployeeInfo() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String image_locator = p.getProperty("directory_image_locator");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab driver.findElement(By.xpath(image_locator)).click();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab e.getMessage();\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @AfterMethod\par
+\tab public void closingTheApplication() \{\par
+\tab\tab driver.close();\par
+\tab\}\par
+\par
+\tab public void searchEmployee(String name, String job_title, String location) \{\par
+\tab\tab boolean isNameValid = name!=null && !name.isBlank() && !name.isEmpty();\par
+\tab\tab boolean isJobTitleValid = job_title!=null&& !job_title.isBlank() && !job_title.isEmpty();\par
+\tab\tab boolean isLocationValid = location!=null&& !location.isBlank() && !location.isEmpty();\par
+\par
+\tab\tab try \{\par
+\tab\tab\tab // three conditions criteria should be kept top in the order\par
+\tab\tab\tab if(isNameValid && isJobTitleValid && isLocationValid) \{\par
+\tab\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectEmployeeName(name);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectJobTitle(job_title);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectLocation(location);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     clickOnSearchButton();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab //two conditions criteria should be kept next in the order\par
+\tab\tab\tab else if(isNameValid && isJobTitleValid ) \{\par
+\tab\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectEmployeeName(name);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectJobTitle(job_title);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     clickOnSearchButton();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab //one condition criteria should be kept next in the order\par
+\tab\tab\tab else if(isNameValid) \{\par
+\tab\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectEmployeeName(name);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     clickOnSearchButton();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab\}\par
+\tab\tab\tab else if (isJobTitleValid) \{\par
+\tab\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab\tab clickOnDirectory();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     selectJobTitle(job_title);\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab     clickOnSearchButton();\par
+\tab\tab\tab     Thread.sleep(2000);\par
+\tab\tab\tab\}\par
+\tab\tab\tab else if(isLocationValid) \{\par
+\tab\tab\tab\tab    Thread.sleep(2000);\par
+\tab\tab\tab\tab    clickOnDirectory();\par
+\tab\tab\tab        Thread.sleep(2000);\par
+\tab\tab\tab        selectLocation(location);\par
+\tab\tab\tab        Thread.sleep(2000);\par
+\tab\tab\tab        clickOnSearchButton();\par
+\tab\tab\tab        Thread.sleep(2000);\par
+\tab\tab\tab\}\par
+\tab\tab\tab else\{\par
+\tab\tab\tab     System.out.println("Invalid Input");\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\par
+\tab public void clickOnDirectory()\{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String directory_locator = p.getProperty("directory_locator");\par
+\tab\tab //ClickOn Directory\par
+\tab\tab driver.findElement(By.xpath(directory_locator)).click();\par
+\tab\}\par
+\par
+\tab public void selectEmployeeName(String name) \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String employeename_locator = p.getProperty("directory_employeename_locator");\par
+\tab\tab String employeename_list_locator = p.getProperty("directory_employeename_list_locator");\par
+\tab\tab //Select Employee Name\par
+\tab\tab WebElement employee = driver.findElement(By.xpath(employeename_locator));\par
+\tab\tab employee.click();\par
+\tab\tab employee.sendKeys(name);\par
+        //Select Employee from Employee List\par
+\tab\tab List <WebElement> employee_list = driver.findElements(By.xpath(employeename_list_locator));\par
+\tab\tab for(WebElement employeename : employee_list) \{\par
+\tab\tab\tab if(employeename.getText().startsWith(name)) \{\par
+\tab\tab\tab\tab employeename.click();\par
+\tab\tab\tab\tab break;\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab public void clickOnSearchButton() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String search_button_locator = p.getProperty("directory_search_button_locator");\par
+\tab\tab //ClickOn Search Button\par
+\tab\tab driver.findElement(By.xpath(search_button_locator)).click();\par
+\tab\}\par
+\par
+\tab public void selectJobTitle(String job_title) \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String jobtitle_locator = p.getProperty("directory_jobtitle_locator");\par
+\tab\tab String jobtitle_list_locator = p.getProperty("directory_jobtitle_list_locator");\par
+\tab     //Select JobTitle\par
+\tab\tab driver.findElement(By.xpath(jobtitle_locator)).click();\par
+\tab     //Select JobTitle from List\par
+\tab\tab List <WebElement> jobtitle_list = driver.findElements(By.xpath(jobtitle_list_locator));\par
+\tab   \tab\tab for(WebElement jobtitle : jobtitle_list) \{\par
+\tab   \tab\tab\tab if(jobtitle.getText().equalsIgnoreCase(job_title)) \{\par
+\tab   \tab\tab\tab\tab jobtitle.click();\par
+\tab   \tab\tab\tab\tab break;\par
+\tab   \tab\tab\tab\}\par
+\tab   \tab\tab\}\par
+   \}\par
+\par
+\tab public void selectLocation(String location) \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String location_locator = p.getProperty("directory_location_locator");\par
+\tab\tab String location_list_locator = p.getProperty("directory_location_list_locator");\par
+\tab\tab //Select Location\par
+\tab\tab driver.findElement(By.xpath(location_locator)).click();\par
+\tab\tab List <WebElement> location_list = driver.findElements(By.xpath(location_list_locator));\par
+  \tab\tab for(WebElement location_val : location_list) \{\par
+  \tab\tab\tab if(location_val.getText().equalsIgnoreCase(location)) \{\par
+  \tab\tab\tab\tab location_val.click();\par
+  \tab\tab\tab\tab break;\par
+  \tab\tab\tab\}\par
+  \tab\tab\}\par
+\tab\}\par
+\}\par
+}
+ 

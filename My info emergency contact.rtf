@@ -1,0 +1,223 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 package com.OrangeHRM_Application.classes;\par
+import java.io.File;\par
+import java.util.Properties;\par
+\par
+import org.openqa.selenium.By;\par
+import org.openqa.selenium.JavascriptExecutor;\par
+import org.openqa.selenium.WebElement;\par
+import org.testng.annotations.AfterMethod;\par
+import org.testng.annotations.BeforeMethod;\par
+import org.testng.annotations.Test;\par
+\par
+public class MyInfoEmergencyContacts extends LoginFunctionality \{\par
+\par
+\tab @BeforeMethod\par
+\tab public void loginToApplication() \{\par
+\tab\tab try \{\par
+\tab        driverInitialize();\par
+\tab        loadProperty();\par
+\tab        loginFunction();\par
+\tab        Thread.sleep(2000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\par
+\tab @Test(priority=1)\par
+\tab public void addingEmployeeEmergencyContacts() \{\par
+\tab\tab try \{\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enterIntoMyInfoEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab addingEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test(priority=2)\par
+\tab public void addValidAttachment() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String myinfo_emergencycontacts_validfile = p.getProperty("myinfo_emergencycontacts_validfile");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enterIntoMyInfoEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab uploadingFile(myinfo_emergencycontacts_validfile);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab clickOnSaveButton();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test(priority=3)\par
+\tab public void addAttachmentWithComment() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String myinfo_emergencycontacts_validfile = p.getProperty("myinfo_emergencycontacts_validfile");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enterIntoMyInfoEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab uploadingFile(myinfo_emergencycontacts_validfile);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enteringComment();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab clickOnSaveButton();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test(priority=4)\par
+\tab public void addInvalidAttachment() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String myinfo_emergencycontacts_invalidfile = p.getProperty("myinfo_emergencycontacts_invalidfile");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enterIntoMyInfoEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab uploadingFile(myinfo_emergencycontacts_invalidfile);\par
+\tab\tab\tab Thread.sleep(5000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Test(priority=5)\par
+\tab public void downloadAttachment() \{\par
+\tab\tab try \{\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab enterIntoMyInfoEmergencyContacts();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab downloadTheAttachment();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @AfterMethod\par
+\tab public void closingTheApplication() \{\par
+\tab\tab driver.close();\par
+\tab\}\par
+\par
+\tab public void enterIntoMyInfoEmergencyContacts() \{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\par
+\tab\tab\tab String myinfo_locator = p.getProperty("myinfo_locator");\par
+\tab\tab\tab String emergencycontacts_locator = p.getProperty("emergencycontacts_locator");\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //Click On MyInfo\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_locator)).click();\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //ClickOn Emergency Contacts\par
+\tab\tab\tab driver.findElement(By.linkText(emergencycontacts_locator)).click();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab public void downloadTheAttachment() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String myinfo_emergencycontacts_download_locator = p.getProperty("myinfo_emergencycontacts_download_locator");\par
+\tab\tab //Download attachment\par
+\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_download_locator)).click();\par
+\tab\}\par
+\par
+\tab public void enteringComment() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String myinfo_emergencycontacts_comment_locator = p.getProperty("myinfo_emergencycontacts_comment_locator");\par
+\tab\tab String myinfo_emergencycontacts_comment = p.getProperty("myinfo_emergencycontacts_comment");\par
+\tab\tab //Entering Comment\par
+\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_comment_locator)).sendKeys(myinfo_emergencycontacts_comment);\par
+\tab\}\par
+\par
+\tab public void addingEmergencyContacts()\{\par
+\tab\tab try \{\par
+\tab\tab\tab //Getting input from properties file\par
+\tab\tab\tab Properties p = loadProperty();\tab\par
+\tab\tab\tab String myinfo_emergencycontacts_add_button_locator = p.getProperty("myinfo_emergencycontacts_add_button_locator");\par
+\tab\tab\tab String myinfo_emergencycontacts_name_locator = p.getProperty("myinfo_emergencycontacts_name_locator");\par
+\tab\tab\tab String myinfo_emergencycontacts_name = p.getProperty("myinfo_emergencycontacts_name");\par
+\tab\tab\tab String myinfo_emergencycontacts_relationship_locator = p.getProperty("myinfo_emergencycontacts_relationship_locator");\par
+\tab\tab\tab String myinfo_emergencycontacts_relationship = p.getProperty("myinfo_emergencycontacts_relationship");\par
+\tab\tab\tab String myinfo_emergencycontacts_hometelephone_locator = p.getProperty("myinfo_emergencycontacts_hometelephone_locator");\par
+\tab\tab\tab String myinfo_emergencycontacts_hometelephone = p.getProperty("myinfo_emergencycontacts_hometelephone");\par
+\tab\tab\tab String myinfo_emergencycontacts_submitbutton_locator = p.getProperty("myinfo_emergencycontacts_submitbutton_locator");\par
+\tab\tab\tab //ClickOn +Add button\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_add_button_locator)).click();\par
+\tab\tab\tab //Enter the Name\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_name_locator)).sendKeys(myinfo_emergencycontacts_name);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //Enter the Relationship\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_relationship_locator)).sendKeys(myinfo_emergencycontacts_relationship);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //Enter the HomeTelephone\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_hometelephone_locator)).sendKeys(myinfo_emergencycontacts_hometelephone);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //ClickOn Submit Button\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_submitbutton_locator)).click();\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\par
+\tab public void clickOnSaveButton() \{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String myinfo_emergencycontacts_savebutton_locator = p.getProperty("myinfo_emergencycontacts_savebutton_locator");\par
+\tab\tab //ClickOn Save button\par
+\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_savebutton_locator)).click();\par
+\tab\}\par
+\par
+\tab public void uploadingFile(String filename)\{\par
+\tab\tab //Getting input from properties file\par
+\tab\tab Properties p = loadProperty();\par
+\tab\tab String autoitScript_path= p.getProperty("autoitScript_path");\par
+\tab\tab String myinfo_emergencycontacts_attachment_add_button_locator= p.getProperty("myinfo_emergencycontacts_attachment_add_button_locator");\par
+\tab\tab String myinfo_emergencycontacts_browse_locator= p.getProperty("myinfo_emergencycontacts_browse_locator");\par
+\tab\tab try \{\par
+\tab\tab\tab String autoitScript = new File(autoitScript_path).getAbsolutePath();\par
+\tab\tab\tab String filePath = new File(filename).getAbsolutePath();\par
+\par
+\tab\tab\tab //ClickOn +Add button\par
+\tab\tab\tab driver.findElement(By.xpath(myinfo_emergencycontacts_attachment_add_button_locator)).click();\par
+\tab\tab\tab //ClickOn Browse\par
+\tab\tab\tab WebElement browse = driver.findElement(By.xpath(myinfo_emergencycontacts_browse_locator));\par
+\tab\tab\tab //Javascript To Click the WebElement\par
+\tab\tab\tab JavascriptExecutor js = (JavascriptExecutor)driver;\par
+\tab\tab\tab js.executeScript("arguments[0].click();", browse);\par
+\tab\tab\tab Thread.sleep(2000);\par
+\tab\tab\tab //AutoitScript to upload the file\par
+\tab\tab\tab Runtime.getRuntime().exec(autoitScript+" "+filePath);\par
+\par
+\tab\tab\}catch(Exception e) \{\par
+\tab\tab\tab System.out.println(e.getMessage());\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\par
+\par
+\}\par
+}
+ 
